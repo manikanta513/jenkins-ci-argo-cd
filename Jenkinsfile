@@ -10,7 +10,7 @@ pipeline {
             agent {
                 docker {
                     image 'docker:24-dind' // or a custom image with docker CLI
-                    args '-v /var/run/docker.sock:/var/run/docker.sock' // bind Docker socket
+                    args '-v /var/run/docker.sock:/var/run/docker.sock --user root' // bind Docker socket
                 }
             }
             steps {
