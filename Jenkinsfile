@@ -13,14 +13,7 @@
     }
     
     stages {
-        
-        stage('Checkout'){
-           steps { 
-                url: 'https://github.com/manikanta513/Jenkins-Zero-To-Hero',
-                branch: 'main'
-           }
-        }
-
+       
         stage('Build Docker'){
             steps{
                 script{
@@ -51,11 +44,15 @@
             }
         }
 
-        
+        stage('Checkout k8s manifest files'){
+           steps { 
+                url: 'https://github.com/manikanta513/argocd-k8s',
+                branch: 'main'
+           }
+        }        
         stage('Update K8S manifest'){
             steps {
                 script{
-                    dir('python-jenkins-argocd-k8s/deploy'){
                         withCredentials([usernamePassword(credentialsId: 'github-credentials', 
                                  usernameVariable: 'GITHUB_USER', 
                                  passwordVariable: 'GITHUB_PASS')]) {
