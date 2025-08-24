@@ -31,7 +31,7 @@ pipeline {
 		stage('checkout k8s script') {
 			agent {
                 docker {
-                    image 'alpine/git' // lightweight git container
+                    image 'alpine/git' args '-u root:root'// lightweight git container
                 }
             }
 			steps {
@@ -44,7 +44,7 @@ pipeline {
         stage('Update Manifest Repo') {
             agent {
                 docker {
-                    image 'alpine/git' // lightweight git container
+                    image 'alpine/git' args '-u root:root' // lightweight git container
                 }
             }
             steps {
