@@ -29,6 +29,11 @@ pipeline {
         }
 		
 		stage('checkout k8s script') {
+			agent {
+                docker {
+                    image 'alpine/git' // lightweight git container
+                }
+            }
 			steps {
 				git branch: 'main',
 					credentialsId: 'github-credentials',
