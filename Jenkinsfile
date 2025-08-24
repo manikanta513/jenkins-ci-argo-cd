@@ -53,6 +53,7 @@
      
         stage('Update K8S manifest'){
             steps {
+              dir("${env.WORKSPACE}"){
                         withCredentials([usernamePassword(credentialsId: 'github-credentials', 
                                  usernameVariable: 'GITHUB_USER', 
                                  passwordVariable: 'GITHUB_PASS')]) {
@@ -68,6 +69,7 @@
                             git remote -v
                             git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git HEAD:main
                             """
+                        }
                 }
             }
         }
