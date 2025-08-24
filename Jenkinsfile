@@ -18,6 +18,7 @@
             steps{
                 script{
                         sh '''
+                        pwd && ls -altr
                         echo 'Buid Docker Image'
                         docker build -t manikanta513/cicd-argocd:${BUILD_NUMBER} .
                         '''
