@@ -45,11 +45,13 @@
         }
 
         stage('Checkout k8s manifest files'){
-           steps { 
+           steps {
+                credentialsId: 'github-credentials'
                 url: 'https://github.com/manikanta513/argocd-k8s.git',
                 branch: 'main'
            }
-        }        
+        }
+     
         stage('Update K8S manifest'){
             steps {
                 script{
