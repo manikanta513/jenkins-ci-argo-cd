@@ -17,12 +17,10 @@
         stage('Build Docker'){
             steps{
                 script{
-                    dir('python-jenkins-argocd-k8s'){
                         sh '''
                         echo 'Buid Docker Image'
                         docker build -t manikanta513/cicd-argocd:${BUILD_NUMBER} .
                         '''
-                    }
                 }
             }
         }
