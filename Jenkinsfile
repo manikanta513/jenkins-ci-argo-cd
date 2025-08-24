@@ -56,6 +56,7 @@
                                  usernameVariable: 'GITHUB_USER', 
                                  passwordVariable: 'GITHUB_PASS')]) {
                             sh """
+                            pwd && ls -altr
                             cat deploy.yaml
                             sed -i "19s|.*|        image: manikanta513/cicd-argocd:${BUILD_NUMBER}|" deploy.yaml
                             cat deploy.yaml
