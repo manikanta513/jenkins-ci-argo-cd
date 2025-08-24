@@ -65,7 +65,7 @@
                             git add deploy.yaml
                             git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                             git remote -v
-                            git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/Jenkins-Zero-To-Hero.git HEAD:main
+                            git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git HEAD:main
                             """                       
                     }
                 }
