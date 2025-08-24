@@ -46,9 +46,9 @@
 
         stage('Checkout k8s manifest files'){
            steps {
-            git credentialsId: 'github-credentials'
-                url: 'https://github.com/manikanta513/argocd-k8s.git',
-                branch: 'main'
+            git branch: 'main',
+                credentialsId: 'github-credentials',
+                url: 'https://github.com/manikanta513/argocd-k8s.git'                
            }
         }
      
