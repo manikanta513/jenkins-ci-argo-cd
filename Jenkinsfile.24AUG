@@ -3,8 +3,6 @@
     agent {
         docker {
             image 'manikanta513/jenkins-agent:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock --user root'
-            reuseNode true
         }
     }
     
