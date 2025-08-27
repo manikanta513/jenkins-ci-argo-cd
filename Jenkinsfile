@@ -36,28 +36,26 @@ pipeline {
                 }
             }
 			steps {
-				git branch: 'main',
-					credentialsId: 'github-credentials',
-					url: 'https://github.com/manikanta513/argocd-k8s.git'
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github-credentials',
+                        usernameVariable: 'GITHUB_USER',
+                        passwordVariable: 'GITHUB_PASS'
+                    )]) {				
                     sh '''
+					rm -rf *
 					pwd
-	                ls -ltr
+	                ls -altr
+				    git clone https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git
+		            cd argocd-k8s
                     sed -i "19s|.*|        image: ${IMAGE_NAME}:${BUILD_NUMBER}|" deploy.yaml
                     git config user.email "manikanta513@gmail.com"
                     git config user.name "manikanta513"
                     git add deploy.yaml
                     git commit -m "Updated deploy.yaml with image ${IMAGE_NAME}:${BUILD_NUMBER}" || echo "No changes to commit"
+                    git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git HEAD:main
                     '''
-                    withCredentials([usernamePassword(
-                        credentialsId: 'github-credentials',
-                        usernameVariable: 'GITHUB_USER',
-                        passwordVariable: 'GITHUB_PASS'
-                    )]) {
-                        sh '''
-                        git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git HEAD:main
-                        '''
 			}
 		}
-    }
- }
+     }
+  }
 }
