@@ -40,6 +40,8 @@ pipeline {
 					credentialsId: 'github-credentials',
 					url: 'https://github.com/manikanta513/argocd-k8s.git'
                     sh '''
+					pwd
+	                ls -ltr
                     sed -i "19s|.*|        image: ${IMAGE_NAME}:${BUILD_NUMBER}|" deploy.yaml
                     git config user.email "manikanta513@gmail.com"
                     git config user.name "manikanta513"
