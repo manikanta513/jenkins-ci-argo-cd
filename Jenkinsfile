@@ -31,7 +31,7 @@ pipeline {
 		stage('checkout k8s script') {
 			agent {
                 docker {
-                    image 'alpine/git' 
+                    image 'bitnami/git:latest' 
 					args '-u root:root'// lightweight git container
                 }
             }
