@@ -39,18 +39,6 @@ pipeline {
 				git branch: 'main',
 					credentialsId: 'github-credentials',
 					url: 'https://github.com/manikanta513/argocd-k8s.git'
-			}
-		}
-
-        stage('Update Manifest Repo') {
-            agent {
-                docker {
-                    image 'alpine/git' 
-					args '-u root:root' // lightweight git container
-                }
-            }
-            steps {
-                script {
                     sh '''
                     sed -i "19s|.*|        image: ${IMAGE_NAME}:${BUILD_NUMBER}|" deploy.yaml
                     git config user.email "manikanta513@gmail.com"
@@ -66,9 +54,8 @@ pipeline {
                         sh '''
                         git push https://${GITHUB_USER}:${GITHUB_PASS}@github.com/manikanta513/argocd-k8s.git HEAD:main
                         '''
-                    }
-                }
-            }
-        }
+			}
+		}
     }
+ }
 }
